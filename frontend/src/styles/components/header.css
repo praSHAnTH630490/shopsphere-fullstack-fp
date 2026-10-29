@@ -1,0 +1,156 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #ffffffef;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid #e7e9ef
+}
+
+.header-inner {
+    width: min(1180px, calc(100% - 32px));
+    min-height: 72px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 25px
+}
+
+.brand {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -.03em;
+    color: #20243a;
+    white-space: nowrap
+}
+
+.brand span {
+    color: #5b4df6
+}
+
+.main-nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex: 1
+}
+
+.main-nav a {
+    color: #737b8e;
+    font-weight: 700;
+    padding: 25px 0;
+    border-bottom: 2px solid transparent
+}
+
+.main-nav a.active {
+    color: #20243a;
+    border-bottom-color: #5b4df6
+}
+
+.nav-badge {
+    background: #eeecff;
+    color: #5b4df6;
+    border-radius: 999px;
+    padding: 2px 6px;
+    font-size: .7rem
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.welcome-text {
+    font-size: .88rem;
+    color: #697287
+}
+
+@media(max-width:900px) {
+    .header-inner {
+        flex-wrap: wrap;
+        padding: 10px 0
+    }
+
+    .main-nav {
+        order: 3;
+        flex-basis: 100%;
+        overflow: auto;
+        justify-content: flex-start
+    }
+
+    .main-nav a {
+        padding: 6px 0;
+        white-space: nowrap
+    }
+
+    .header-actions {
+        margin-left: auto
+    }
+
+    .welcome-text {
+        display: none
+    }
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    padding: 8px;
+    cursor: pointer
+}
+
+.menu-toggle span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    background: currentColor;
+    margin: 4px 0;
+    border-radius: 4px
+}
+
+@media (max-width: 820px) {
+    .header-inner {
+        position: relative;
+        flex-wrap: wrap
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto
+    }
+
+    .main-nav,
+    .header-actions {
+        display: none
+    }
+
+    .main-nav.open,
+    .header-actions.open {
+        display: flex;
+        width: 100%
+    }
+
+    .main-nav.open {
+        order: 4;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px 0
+    }
+
+    .main-nav.open a {
+        padding: 11px 4px
+    }
+
+    .header-actions.open {
+        order: 5;
+        padding: 10px 0 14px;
+        align-items: center;
+        justify-content: flex-end
+    }
+
+    .welcome-text {
+        margin-right: auto
+    }
+}

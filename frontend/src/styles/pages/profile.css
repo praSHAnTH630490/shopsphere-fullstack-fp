@@ -1,0 +1,46 @@
+/* Profile styles */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px
+}
+
+.profile-grid form {
+    display: grid;
+    gap: 14px
+}
+
+.saved-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding: 15px 0
+}
+
+.saved-address p {
+    margin: 3px 0;
+    color: #697287
+}
+
+@media (max-width:950px) {
+    .profile-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+.danger {
+    color: #b42318
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.saved-address>div:last-child {
+    display: flex;
+    gap: 4px;
+    align-items: center
+}

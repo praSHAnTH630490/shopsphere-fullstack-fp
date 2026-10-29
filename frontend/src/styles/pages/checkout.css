@@ -1,0 +1,70 @@
+/* Checkout styles */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1.7fr .8fr;
+    gap: 25px
+}
+
+.address-option {
+    display: flex !important;
+    grid-template-columns: auto 1fr !important;
+    grid-template-rows: auto !important;
+    align-items: start;
+    border: 1px solid #e3e5eb;
+    border-radius: 12px;
+    padding: 14px;
+    margin: 9px 0
+}
+
+.address-option.selected {
+    border-color: #7066f6;
+    background: #f8f7ff
+}
+
+.address-option input {
+    width: auto !important
+}
+
+.address-option p {
+    margin: 4px 0;
+    color: #697287
+}
+
+.address-option span {
+    font-size: .85rem;
+    color: #7b8497
+}
+
+.address-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px
+}
+
+.address-form button {
+    grid-column: 1/-1
+}
+
+.payment-option {
+    display: flex !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: center;
+    margin: 10px 0
+}
+
+.payment-option input {
+    width: auto !important
+}
+
+@media (max-width:950px) {
+    .checkout-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+@media (max-width:700px) {
+    .address-form {
+        grid-template-columns: 1fr
+    }
+}

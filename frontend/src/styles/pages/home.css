@@ -1,0 +1,149 @@
+/* Home styles */
+.hero {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 75px 0 70px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 50px
+}
+
+.hero h1 {
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    line-height: 1.02;
+    margin: 12px 0 20px;
+    letter-spacing: -.055em
+}
+
+.hero h1 span {
+    color: #5b4df6
+}
+
+.hero p {
+    font-size: 1.12rem;
+    color: #697287;
+    max-width: 620px
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px
+}
+
+.hero-art {
+    min-height: 410px;
+    background: linear-gradient(135deg, #eeeaff, #fdfcff);
+    border-radius: 36px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden
+}
+
+.hero-circle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: #5b4df6;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 7rem;
+    box-shadow: 0 30px 80px #5b4df640
+}
+
+.float-card {
+    position: absolute;
+    right: 22px;
+    bottom: 25px;
+    background: #fff;
+    padding: 16px 20px;
+    border-radius: 15px;
+    box-shadow: 0 12px 35px #20204d15;
+    display: grid
+}
+
+.float-card span {
+    font-size: .82rem;
+    color: #7b8497
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px
+}
+
+.category-card {
+    background: white;
+    border: 1px solid #eceef4;
+    border-radius: 16px;
+    padding: 22px;
+    display: grid;
+    gap: 5px;
+    transition: .2s
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px #20204d0b
+}
+
+.category-icon {
+    height: 65px;
+    width: 65px;
+    border-radius: 14px;
+    background: #f0eeff;
+    display: grid;
+    place-items: center;
+    color: #5b4df6;
+    font-size: 1.8rem
+}
+
+.category-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px
+}
+
+.category-card span {
+    color: #7b8497;
+    font-size: .88rem
+}
+
+@media (max-width:950px) {
+    .hero {
+        grid-template-columns: 1fr
+    }
+
+    .hero-art {
+        min-height: 300px
+    }
+}
+
+@media (max-width:700px) {
+    .hero {
+        padding-top: 40px
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+@media (max-width:480px) {
+    .category-grid {
+        grid-template-columns: 1fr
+    }
+
+    .hero-actions {
+        flex-direction: column
+    }
+
+    .hero-art {
+        display: none
+    }
+}

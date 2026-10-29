@@ -1,0 +1,101 @@
+/* Product Card styles */
+.small-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: .2s
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #e9ebf1;
+    border-radius: 16px;
+    overflow: hidden;
+    min-width: 0;
+    transition: .2s
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px #20204d12
+}
+
+.product-image {
+    height: 230px;
+    background: #f3f4f7;
+    position: relative
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.wish-btn {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 1.25rem;
+    color: #5b4df6;
+    cursor: pointer
+}
+
+.product-body {
+    padding: 16px
+}
+
+.product-body h3 {
+    margin: 4px 0;
+    font-size: 1rem
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px
+}
+
+.small-btn {
+    padding: 8px 11px;
+    background: #f0eeff;
+    color: #5145d9
+}
+
+.small-btn:disabled {
+    opacity: .55
+}
+
+@media (max-width:950px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+@media (max-width:700px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+@media (max-width:480px) {
+    .product-grid {
+        grid-template-columns: 1fr
+    }
+}

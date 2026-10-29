@@ -1,0 +1,13 @@
+/* About styles */
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px
+}
+
+@media (max-width:700px) {
+    .info-cards {
+        grid-template-columns: 1fr
+    }
+}

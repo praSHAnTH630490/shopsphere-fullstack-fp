@@ -1,0 +1,58 @@
+/* Orders styles */
+.order-list {
+    display: grid;
+    gap: 10px
+}
+
+.order-card {
+    background: white;
+    border: 1px solid #e7e9ef;
+    border-radius: 15px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.order-card h3 {
+    margin: 5px 0
+}
+
+.order-card p {
+    color: #7b8497;
+    margin: 0
+}
+
+.order-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.status-delivered {
+    background: #eaf8ef;
+    color: #19763b
+}
+
+.status-cancelled {
+    background: #fff0f0;
+    color: #b42318
+}
+
+.status-placed,
+.status-confirmed {
+    background: #eef5ff;
+    color: #2458a6
+}
+
+@media (max-width:700px) {
+    .order-card {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column
+    }
+
+    .order-actions {
+        flex-wrap: wrap
+    }
+}

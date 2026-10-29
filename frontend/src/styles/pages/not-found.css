@@ -1,0 +1,180 @@
+
+/* ========================================
+   NOT FOUND PAGE
+======================================== */
+
+.not-found-page {
+  display: flex;
+  min-height: 75vh;
+  padding: 64px 24px;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgb(232 93 117 / 10%),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgb(255 190 110 / 12%),
+      transparent 35%
+    ),
+    #ffffff;
+  text-align: center;
+}
+
+.not-found-content {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.not-found-code {
+  margin: 0;
+  color: #e85d75;
+  font-size: clamp(6rem, 20vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -8px;
+  line-height: 1;
+  text-shadow: 5px 6px 0 rgb(232 93 117 / 12%);
+}
+
+.not-found-icon {
+  display: flex;
+  width: 90px;
+  height: 90px;
+  margin: 24px auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f7d6dc;
+  border-radius: 28px;
+  background: #fff1f3;
+  color: #d94662;
+  font-size: 2.6rem;
+  transform: rotate(-8deg);
+}
+
+.not-found-title {
+  margin: 0 0 14px;
+  color: #202124;
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.not-found-description {
+  max-width: 440px;
+  margin: 0 auto 30px;
+  color: #737987;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-home-button,
+.not-found-back-button {
+  display: inline-flex;
+  min-height: 48px;
+  padding: 0 24px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.not-found-home-button {
+  background: #e85d75;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgb(232 93 117 / 20%);
+}
+
+.not-found-home-button:hover {
+  transform: translateY(-2px);
+  background: #d94662;
+  box-shadow: 0 9px 22px rgb(232 93 117 / 28%);
+}
+
+.not-found-back-button {
+  border-color: #e5e7eb;
+  background: #ffffff;
+  color: #3b404b;
+}
+
+.not-found-back-button:hover {
+  border-color: #e85d75;
+  background: #fff1f3;
+  color: #d94662;
+}
+
+.not-found-home-button:focus-visible,
+.not-found-back-button:focus-visible {
+  outline: 3px solid rgb(232 93 117 / 35%);
+  outline-offset: 3px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 480px) {
+  .not-found-page {
+    min-height: 65vh;
+    padding: 44px 18px;
+  }
+
+  .not-found-code {
+    letter-spacing: -4px;
+  }
+
+  .not-found-icon {
+    width: 72px;
+    height: 72px;
+    margin: 20px auto;
+    border-radius: 22px;
+    font-size: 2.1rem;
+  }
+
+  .not-found-description {
+    font-size: 0.94rem;
+  }
+
+  .not-found-actions {
+    flex-direction: column;
+  }
+
+  .not-found-home-button,
+  .not-found-back-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found-home-button,
+  .not-found-back-button {
+    transition: none;
+  }
+
+  .not-found-home-button:hover {
+    transform: none;
+  }
+}
