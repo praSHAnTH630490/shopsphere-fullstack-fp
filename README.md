@@ -435,9 +435,8 @@ The React Single Page Application is available at `http://localhost:5173`.
 
 ## 17. Author & Contact
 
-- **Developer**: Prashanth Maturi
+- **Developer**: Sai Prashanth Maturi
 - **Role**: Java Full Stack Developer
 - **Location**: Hyderabad, Telangana, India
-- **Repository**: [https://github.com/prashanthmaturi/online-store-fullstack](https://github.com/prashanthmaturi/online-store-fullstack) *(Configure your repository remote)*
-- **LinkedIn**: *(Add your LinkedIn profile link)*
-- **Email**: *(Add your contact email)*
+- **Repository**: https://github.com/praSHAnTH630490/online-store-fullstack
+- **Email**: prashanthmaturi2003@gmail.com
