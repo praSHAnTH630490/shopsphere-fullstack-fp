@@ -1,112 +1,126 @@
-# ShopSphere — Online Store
+# ShopSphere — Enterprise-Grade Full-Stack E-Commerce Platform
 
-> Full-stack e-commerce application built with Java, Spring Boot, React, and MySQL.
+<p align="center">
+  <b>A modern, decoupled e-commerce platform built with Spring Boot 3.5, React 19, Spring Security 6, Redux Toolkit, and MySQL 8.0.</b>
+</p>
 
-[![Java 17](https://img.shields.io/badge/Java-17-orange.svg?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/17/)
-[![Spring Boot 3.5.6](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen.svg?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![Spring Security 6](https://img.shields.io/badge/Spring%20Security-6.x-green.svg?logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
-[![React 19](https://img.shields.io/badge/React-19.2.8-blue.svg?logo=react&logoColor=white)](https://react.dev/)
-[![Vite 8](https://img.shields.io/badge/Vite-8.3.2-purple.svg?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![MySQL 8.0](https://img.shields.io/badge/MySQL-8.0-blue.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
----
-
-## 1. Product Catalog Overview
-
-![ShopSphere Product Catalog](docs/screenshots/products-catalog.png)
-*Figure 1: ShopSphere Product Catalog interface displaying multi-faceted filtering (category, brand, price range, rating), responsive product cards with localized INR pricing, real-time search, and interactive wishlist triggers.*
-
-> **Note on Screenshot**: If you are exploring this repository freshly cloned from GitHub, follow the instructions in [`docs/screenshots/README.md`](docs/screenshots/README.md) to generate fresh 1080p UI captures from your local running instance.
+<p align="center">
+  <a href="https://openjdk.org/projects/jdk/17/"><img src="https://img.shields.io/badge/Java-17%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17" /></a>
+  <a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.6-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.5.6" /></a>
+  <a href="https://spring.io/projects/spring-security"><img src="https://img.shields.io/badge/Spring%20Security-6.x-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" alt="Spring Security 6" /></a>
+  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19.2.8-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" /></a>
+  <a href="https://redux-toolkit.js.org/"><img src="https://img.shields.io/badge/Redux%20Toolkit-2.13.0-764ABC?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Toolkit" /></a>
+  <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-8.3.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
+  <a href="https://www.mysql.com/"><img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8.0" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License: MIT" /></a>
+</p>
 
 ---
 
-## 2. Project Status & Limitations
+## Table of Contents
 
-- **Personal Contribution**: Solo developer (designed, implemented, and tested full-stack architecture).
-- **Target Role**: Java Full Stack Developer (Hyderabad / Pan-India entry-level to junior engineering positions).
-- **Deployment Status**: Configured for containerized or free-tier deployment (Render / Railway / TiDB Cloud); currently configured for local workstation development.
-- **Payment Processing**: Simulation only. Payment transactions for Card and UPI are simulated through backend state machines; no real monetary gateway is claimed.
-- **Automated Test Coverage**: 19 automated unit and service tests implemented with JUnit 5 and Mockito covering cart calculations, inventory validation, order workflows, and payment simulations.
-
----
-
-## 3. Features & Verification Matrix
-
-Features categorized by source verification and automated testing evidence:
-
-| Feature Category | Description | Status |
-| :--- | :--- | :---: |
-| **Authentication & RBAC** | User registration with BCrypt hashing (cost 10), stateless JWT token issuance (`JJWT 0.12.6`), and role partitioning (`ROLE_CUSTOMER`, `ROLE_ADMIN`). | **Tested & Verified** |
-| **Product Catalog** | Specification-driven search, category/brand filtering, price-range bounding, multi-mode sorting, and pagination. | **Tested & Verified** |
-| **Cart Operations** | Cart item addition, quantity increments with stock validation, subtotal calculation, and item removal. Full table scans optimized with indexed DAO queries. | **Tested & Verified** |
-| **Wishlist Management** | Saved-for-later items toggled directly from product cards or product details; per-user wishlist isolation. | **Source Verified** |
-| **Checkout Workflow** | Saved delivery address selection, dynamic address creation, cart inventory availability validation, and atomic order placement. | **Tested & Verified** |
-| **Payment Simulation** | Safe simulated payment lifecycle supporting Cash on Delivery, Simulated Card, and Simulated UPI with status tracking (`PENDING`, `SUCCESS`, `FAILED`). | **Tested & Verified** |
-| **Order Management** | Customer order history, itemized breakdowns, status tracking (`PLACED`, `CONFIRMED`, `PACKED`, `OUT_FOR_DELIVERY`, `DELIVERED`, `CANCELLED`), and stock-restoring cancellation. | **Tested & Verified** |
-| **Customer Profile** | Personal details update, BCrypt password change, and multi-address management with IDOR protection. | **Source Verified** |
-| **Product Reviews** | Verified-purchaser review posting (guarded by order delivery verification), review ratings, and review moderation. | **Source Verified** |
-| **Contact Form** | Inquiry submission form with support for both guest visitors and authenticated users. | **Source Verified** |
-| **Admin Portal** | Summary dashboard metrics, product CRUD, category/brand CRUD, order status transitions, and real-time inventory stock management. | **Source Verified** |
+- [1. Executive Overview](#1-executive-overview)
+- [2. System Architecture](#2-system-architecture)
+- [3. Key Architectural & Engineering Decisions](#3-key-architectural--engineering-decisions)
+- [4. Entity Relationship Diagram (ERD)](#4-entity-relationship-diagram-erd)
+- [5. Core Business Workflows](#5-core-business-workflows)
+- [6. Technology Stack & Verified Versions](#6-technology-stack--verified-versions)
+- [7. Comprehensive Feature Matrix](#7-comprehensive-feature-matrix)
+- [8. REST API Specification](#8-rest-api-specification)
+- [9. Automated Testing & QA Evidence](#9-automated-testing--qa-evidence)
+- [10. Local Environment Setup & Run Guide](#10-local-environment-setup--run-guide)
+- [11. Environment Configuration (.env)](#11-environment-configuration-env)
+- [12. Deployment & Cloud Production Readiness](#12-deployment--cloud-production-readiness)
+- [13. Troubleshooting & Edge Cases](#13-troubleshooting--edge-cases)
+- [14. Engineering Roadmap](#14-engineering-roadmap)
+- [15. Author & Professional Contact](#15-author--professional-contact)
 
 ---
 
-## 4. Technology Stack
+## 1. Executive Overview
 
-| Layer | Technologies & Libraries | Verified Version |
-| :--- | :--- | :---: |
-| **Backend Framework** | Spring Boot, Spring Web, Spring Validation | `3.5.6` |
-| **Backend Runtime** | Java OpenJDK (Release Target 17) | `Java 17 / 21` |
-| **Security & Auth** | Spring Security 6, JJWT (`jjwt-api`, `jjwt-impl`, `jjwt-jackson`), BCrypt | `0.12.6` |
-| **Persistence & ORM** | Spring Data JPA, Hibernate 6.x | Managed by Spring Boot |
-| **Database** | MySQL Server (`mysql-connector-j`) | `8.0+` |
-| **Testing** | JUnit Jupiter 5, Mockito, AssertJ, Spring Test | `5.12.1` |
-| **Frontend Framework** | React (JSX), React DOM | `19.2.8` |
-| **Build Tool & Bundler**| Vite | `8.3.2` |
-| **Client Routing** | React Router DOM | `7.18.4` |
-| **State Management** | Redux Toolkit (`@reduxjs/toolkit`), React Redux | `2.13.0` / `9.3.0` |
-| **HTTP Client** | Axios (with token interceptor) | `1.20.0` |
-| **Code Quality** | ESLint with React Hooks & React Refresh rules | `10.10.0` |
+**ShopSphere** is a full-featured, multi-tier e-commerce web application engineered from the ground up to reflect modern enterprise Java full-stack standards. Designed with a clear separation of concerns, the platform pairs an event-driven Spring Boot 3 REST API backend with a high-performance React 19 Single Page Application (SPA).
+
+### Architectural Highlights
+- **Stateless Authentication**: Pure token-based authentication via **JJWT (0.12.6)** with HMAC-SHA256 signatures, avoiding server-side session memory consumption.
+- **Strict Role-Based Access Control (RBAC)**: Fine-grained method and URL authorization separating public visitors, authenticated customers (`ROLE_CUSTOMER`), and system administrators (`ROLE_ADMIN`).
+- **Data Integrity & Concurrency**: Atomic transactional boundaries (`@Transactional`) managing inventory decrements, order placements, simulated payments, and automated stock restoration on order cancellations.
+- **Optimized Relational Schema**: 16 normalized tables in MySQL 8.0 with foreign key indexing, derived query lookups (`findByCartId`), and dynamic multi-attribute catalog filtering powered by JPA Specifications.
+- **Client-Side State Management**: Centralized store built on **Redux Toolkit** and React Context managing asynchronous cart mutations, user authentication sessions, and responsive UI feedback.
 
 ---
 
-## 5. Architecture Overview
+## 2. System Architecture
 
-ShopSphere uses a 3-tier decoupled architecture separating presentation, business logic, and relational storage.
+ShopSphere adopts a decoupled, 3-tier client-server architectural model:
 
 ```mermaid
 graph TD
-    subgraph Client ["Frontend (React 19 SPA)"]
-        Browser["React Components + React Router 7"]
-        Redux["Redux Toolkit (Cart & Wishlist Slices)"]
-        Axios["Axios Interceptor (Bearer JWT)"]
-        Browser --> Redux
-        Browser --> Axios
+    subgraph Client ["Presentation Layer (React 19 SPA)"]
+        UI["React 19 Components (Vite 8)"]
+        State["Redux Toolkit (Cart & Wishlist)"]
+        AuthCtx["Auth Context (JWT Storage)"]
+        Axios["Axios Interceptor (Bearer Token)"]
+        UI --> State
+        UI --> AuthCtx
+        State --> Axios
+        UI --> Axios
     end
 
-    subgraph Backend ["Backend (Spring Boot 3.5.6)"]
-        Filter["JwtAuthenticationFilter"]
-        Security["Spring Security 6 (RBAC)"]
-        Resource["REST Controllers (DTO Records)"]
-        Service["Business Services (@Transactional)"]
-        DAO["Spring Data JPA Repositories"]
-        
-        Filter --> Security --> Resource --> Service --> DAO
+    subgraph Gateway ["Security & Ingress Gateway"]
+        CORS["CORS Filter (Configurable Allowed Origins)"]
+        JWTFilter["JwtAuthenticationFilter (OncePerRequestFilter)"]
+        SecurityChain["Spring Security 6 Filter Chain"]
+        CORS --> JWTFilter --> SecurityChain
     end
 
-    subgraph Database ["Relational Database"]
-        MySQL[("MySQL 8.0 (16 Tables)")]
-        DAO --> MySQL
+    subgraph ServiceLayer ["Application & Domain Layer (Spring Boot 3.5.6)"]
+        Controllers["REST Resources (Auth, Products, Cart, Orders, Admin)"]
+        Services["Business Services (Transaction Boundaries @Transactional)"]
+        DTOs["Immutable Java Records (Request / Response DTOs)"]
+        ExceptionHandler["GlobalExceptionHandler (@RestControllerAdvice)"]
+        Controllers --> Services
+        Controllers --> DTOs
+        Controllers --> ExceptionHandler
     end
 
-    Axios -->|"HTTPS / JSON"| Filter
+    subgraph DataLayer ["Persistence & Storage Layer (JPA / MySQL)"]
+        DAOs["Spring Data JPA Repositories (Derived & Specification Queries)"]
+        Hibernate["Hibernate 6 ORM"]
+        DB[("MySQL 8.0 Server (16 Relational Tables)")]
+        Services --> DAOs
+        DAOs --> Hibernate
+        Hibernate --> DB
+    end
+
+    Axios -->|"HTTPS / JSON REST"| CORS
+    SecurityChain --> Controllers
 ```
 
 ---
 
-## 6. Entity Relationship Diagram (ERD)
+## 3. Key Architectural & Engineering Decisions
 
-The database schema is fully normalized across 16 relational entities:
+### 3.1 Security & OWASP Compliance
+- **Cryptographic Hashing**: All user credentials are encrypted using `BCryptPasswordEncoder` with a default logarithmic work factor of 10 prior to persistence.
+- **Stateless JWT Lifecycle**: Requests are validated statelessly by `JwtAuthenticationFilter`. Expired or tampered tokens are rejected before reaching controller endpoints.
+- **IDOR Protection**: Insecure Direct Object References are prevented by enforcing user ownership checks at the service layer:
+  - Orders can only be queried or cancelled by their respective owner (`order.getUser().getId().equals(currentUser.getId())`).
+  - Addresses are resolved exclusively via `addressDAO.findByIdAndUser(addressId, currentUser)`.
+  - Reviews can only be submitted by customers who have an order with status `DELIVERED` containing that specific item.
+- **CORS Hardening**: Cross-Origin Resource Sharing is decoupled from hardcoded origins and bound to externalized environment properties (`app.cors.allowed-origins`).
+- **SQL Injection Prevention**: Relational queries utilize Spring Data JPA parameterization and Type-Safe JPA Criteria Specifications.
+
+### 3.2 Performance & Database Tuning
+- **Elimination of N+1 Queries & Full-Table Scans**: Resolved performance bottlenecks in cart management by replacing generic `findAll().stream().filter(...)` queries with indexed derived queries (`cartItemDAO.findByCartId(cartId)`).
+- **Dynamic Specification Filtering**: Catalog search supports dynamic combinations of category, brand, minimum price, maximum price, minimum star rating, keyword text, and sorting modes in a single query execution.
+- **Immutable DTOs via Java Records**: All payload inputs and outputs are defined as immutable Java Records (`record`), reducing boilerplate and guaranteeing thread safety across execution contexts.
+
+---
+
+## 4. Entity Relationship Diagram (ERD)
+
+The database schema is normalized to Third Normal Form (3NF) across 16 relational entities:
 
 ```mermaid
 erDiagram
@@ -143,6 +157,12 @@ erDiagram
         varchar phone
         boolean active
         datetime created_at
+        datetime updated_at
+    }
+
+    ROLES {
+        bigint id PK
+        varchar name UK
     }
 
     PRODUCTS {
@@ -153,8 +173,11 @@ erDiagram
         bigint category_id FK
         decimal price
         int stock_quantity
+        varchar image_url
         varchar sku UK
         boolean active
+        datetime created_at
+        datetime updated_at
     }
 
     ORDERS {
@@ -165,6 +188,7 @@ erDiagram
         decimal total_amount
         varchar status
         datetime created_at
+        datetime updated_at
     }
 
     PAYMENTS {
@@ -175,268 +199,315 @@ erDiagram
         decimal amount
         varchar transaction_reference
         datetime paid_at
+        datetime created_at
     }
 ```
 
 ---
 
-## 7. Core Workflow: Checkout & Payment Simulation
+## 5. Core Business Workflows
+
+### Checkout & Simulated Payment Lifecycle
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as Customer
-    participant UI as React Checkout UI
-    participant Backend as Order & Payment Services
+    actor Customer as Customer (Browser)
+    participant CartUI as Checkout UI (React)
+    participant OrderService as OrderService (@Transactional)
+    participant PaymentService as PaymentService (@Transactional)
     participant DB as MySQL Database
 
-    User->>UI: Review Cart & Click "Place Order"
-    UI->>Backend: POST /api/orders { addressId, paymentMethod }
-    Backend->>DB: Verify user cart items & stock availability
-    Backend->>DB: Decrement product stock quantities
-    Backend->>DB: Insert Order (Status: PLACED)
-    Backend->>DB: Insert Payment (Status: PENDING)
-    Backend->>DB: Delete cart items (Clear user cart)
-    Backend-->>UI: Return OrderResponse (orderId, orderNumber)
+    Customer->>CartUI: Review Cart & Click "Place Order"
+    CartUI->>OrderService: POST /api/orders { addressId, paymentMethod }
+    Note over OrderService: 1. Validate customer address ownership<br/>2. Verify cart is not empty<br/>3. Verify product availability & active status
+    OrderService->>DB: Decrement product stock quantities
+    OrderService->>DB: Insert Order (Status: PLACED)
+    OrderService->>DB: Insert Payment (Status: PENDING)
+    OrderService->>DB: Delete Cart Items (Clear active cart)
+    OrderService-->>CartUI: Return OrderResponse (orderId, orderNumber, total)
 
-    alt Payment Method is CARD or UPI Simulation
-        UI->>Backend: POST /api/payments/simulate?orderId=123 { result: 'SUCCESS' }
-        Backend->>DB: Verify order ownership & transition status to SUCCESS
-        Backend-->>UI: Return PaymentResponse (SUCCESS, TxRef: SIM-XXXX)
+    alt Payment Method is CARD_SIMULATION or UPI_SIMULATION
+        CartUI->>PaymentService: POST /api/payments/simulate?orderId=123 { result: 'SUCCESS' }
+        Note over PaymentService: Verify caller ownership & verify payment is PENDING
+        PaymentService->>DB: Update Payment (Status: SUCCESS, TxRef: SIM-XXXX)
+        PaymentService-->>CartUI: Return PaymentResponse (SUCCESS)
     end
 
-    UI->>UI: dispatch(resetCart()) - Redux state cleared
-    UI-->>User: Navigate to /orders/:id confirmation screen
+    CartUI->>CartUI: dispatch(resetCart()) - Redux store cleared
+    CartUI-->>Customer: Redirect to /orders/:id confirmation view
 ```
 
 ---
 
-## 8. Prerequisites
+## 6. Technology Stack & Verified Versions
 
-Ensure the following tools are installed on your workstation:
-
-- **Java Development Kit (JDK)**: Version 17 or higher (`java -version`)
-- **Apache Maven**: Version 3.8+ (`mvn -version`)
-- **Node.js**: Version 18+ (`node -v`)
-- **npm**: Version 9+ (`npm -v`)
-- **MySQL Server**: Version 8.0+ running on port 3306
+| Category | Technology | Version | Purpose in ShopSphere |
+| :--- | :--- | :---: | :--- |
+| **Language** | Java (OpenJDK) | `17 LTS` | Core backend runtime and type-safe language |
+| **Framework** | Spring Boot | `3.5.6` | Application bootstrap, DI, and auto-configuration |
+| **Security** | Spring Security | `6.x` | Stateless filter chain, BCrypt, and RBAC rules |
+| **JWT** | JJWT (`io.jsonwebtoken`) | `0.12.6` | Cryptographic HMAC-SHA256 token issuance/parsing |
+| **ORM** | Spring Data JPA / Hibernate | `6.x` | Object-Relational Mapping & Specification queries |
+| **Database** | MySQL Server | `8.0+` | Relational data persistence with foreign key constraints |
+| **Testing** | JUnit 5 & Mockito | `5.12.1` | Unit, service regression, and boundary test suites |
+| **Build Tool** | Apache Maven | `3.8+` | Dependency management and production JAR packaging |
+| **Frontend** | React (JSX) | `19.2.8` | Declarative, component-based user interface |
+| **Bundler** | Vite | `8.3.2` | Ultra-fast HMR and optimized production asset bundling |
+| **Routing** | React Router DOM | `7.18.4` | Client-side declarative routing and protected routes |
+| **State** | Redux Toolkit | `2.13.0` | Global state management for shopping cart & wishlist |
+| **Networking** | Axios | `1.20.0` | HTTP client with automatic JWT token interceptor |
+| **Code Quality** | ESLint | `10.10.0` | Static analysis with React Hooks & Fast Refresh rules |
 
 ---
 
-## 9. Environment Configuration
+## 7. Comprehensive Feature Matrix
 
-Copy the template environment configuration file:
+| Feature | Description | Implementation Details | Verified Status |
+| :--- | :--- | :--- | :---: |
+| **Authentication** | Registration, Login, Session Persistence | Passwords encoded with BCrypt; JWT token returned and stored in `localStorage`. | **Tested & Verified** |
+| **RBAC** | Customer vs Admin role separation | `SecurityFilterChain` enforces `hasRole('ADMIN')` for management endpoints. | **Tested & Verified** |
+| **Product Catalog** | Paginated listing with multi-facet filters | Dynamic `ProductSpecification` filtering by category, brand, price, rating. | **Tested & Verified** |
+| **Cart Management** | Add, update quantity, remove, and clear | Stock limit validation prevents overselling; subtotal calculated atomically. | **Tested & Verified** |
+| **Wishlist** | Toggle saved products | Customer-isolated wishlist with single-click heart toggling. | **Source Verified** |
+| **Order Placement** | Multi-item checkout with saved addresses | Atomically decrements inventory, creates order, and clears user cart. | **Tested & Verified** |
+| **Payment Simulation** | Safe simulated checkout workflows | Supports COD, Card simulation, and UPI simulation with transaction IDs. | **Tested & Verified** |
+| **Order Cancellation** | Restores stock to product inventory | Only `PLACED` orders can be cancelled; product inventory is credited back. | **Tested & Verified** |
+| **Verified Reviews** | Star ratings and review comments | Enforces delivered-purchase verification before permitting review creation. | **Source Verified** |
+| **Admin Portal** | Analytics metrics & catalog management | Product/Category/Brand CRUD, order lifecycle tracking, and stock adjustments. | **Source Verified** |
+| **Contact Inquiries** | Customer support message submission | Open to both unauthenticated visitors and logged-in customers safely. | **Source Verified** |
+
+---
+
+## 8. REST API Specification
+
+### 8.1 Authentication & Profile
+| Verb | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Public | Register new customer account and return JWT token |
+| `POST` | `/api/auth/login` | Public | Authenticate credentials and issue JWT token |
+| `GET` | `/api/users/me` | Authenticated | Retrieve authenticated user profile |
+| `PUT` | `/api/users/me` | Authenticated | Update user name and telephone |
+| `PUT` | `/api/users/me/password` | Authenticated | Change account password (validates current password) |
+| `GET` | `/api/users/me/addresses`| Authenticated | List customer saved delivery addresses |
+| `POST` | `/api/users/me/addresses`| Authenticated | Create and save new delivery address |
+| `PUT` | `/api/users/me/addresses/{id}` | Authenticated | Update existing address (IDOR protected) |
+| `DELETE`| `/api/users/me/addresses/{id}`| Authenticated | Delete saved address |
+
+### 8.2 Catalog & Public Resources
+| Verb | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/products` | Public | Search products with pagination, filters, and sorting |
+| `GET` | `/api/products/{id}` | Public | Retrieve detailed product specifications |
+| `GET` | `/api/products/{id}/reviews` | Public | List published reviews for a product |
+| `GET` | `/api/categories` | Public | List active product categories |
+| `GET` | `/api/brands` | Public | List active product brands |
+| `POST` | `/api/contact` | Public / Auth | Submit inquiry message to support desk |
+
+### 8.3 Cart & Wishlist
+| Verb | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/cart` | Authenticated | Retrieve customer's active shopping cart |
+| `POST` | `/api/cart/items` | Authenticated | Add item to cart with stock availability check |
+| `PUT` | `/api/cart/items/{id}`| Authenticated | Update cart item quantity (enforces stock limit) |
+| `DELETE`| `/api/cart/items/{id}`| Authenticated | Remove specific line item from cart |
+| `DELETE`| `/api/cart` | Authenticated | Clear all items from customer's cart |
+| `GET` | `/api/wishlist` | Authenticated | Retrieve customer's saved wishlist |
+| `POST` | `/api/wishlist/items/{productId}` | Authenticated | Add product to wishlist |
+| `DELETE`| `/api/wishlist/items/{productId}` | Authenticated | Remove product from wishlist |
+
+### 8.4 Orders & Payment Simulation
+| Verb | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/orders` | Authenticated | Create order from cart items with address validation |
+| `GET` | `/api/orders` | Authenticated | Retrieve customer's historical orders |
+| `GET` | `/api/orders/{id}` | Authenticated | Retrieve itemized order details (ownership verified) |
+| `POST` | `/api/orders/{id}/cancel` | Authenticated | Cancel order and automatically restore stock |
+| `POST` | `/api/payments/simulate` | Authenticated | Execute simulated payment (`SUCCESS` / `FAILED`) |
+| `POST` | `/api/products/{id}/reviews` | Authenticated | Create verified-purchaser product review |
+
+### 8.5 Administration Portal (`ROLE_ADMIN`)
+| Verb | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/admin/dashboard` | Role `ADMIN` | High-level metrics (Total Revenue, Orders, Products, Users) |
+| `GET, POST` | `/api/admin/products` | Role `ADMIN` | List all products or create new catalog item |
+| `PUT, DELETE`| `/api/admin/products/{id}`| Role `ADMIN` | Update product details or deactivate product |
+| `GET, POST` | `/api/admin/categories` | Role `ADMIN` | List or create product categories |
+| `PUT, DELETE`| `/api/admin/categories/{id}`| Role `ADMIN`| Update or deactivate category |
+| `GET, POST` | `/api/admin/brands` | Role `ADMIN` | List or create footwear brands |
+| `PUT, DELETE`| `/api/admin/brands/{id}` | Role `ADMIN` | Update or deactivate brand |
+| `GET` | `/api/admin/orders` | Role `ADMIN` | View master order fulfillment queue |
+| `PATCH` | `/api/admin/orders/{id}/status` | Role `ADMIN` | Advance order state (`CONFIRMED`, `DELIVERED`, etc.) |
+| `GET` | `/api/admin/inventory` | Role `ADMIN` | Real-time stock audit across catalog |
+| `PATCH` | `/api/admin/inventory/products/{id}` | Role `ADMIN` | Directly update inventory stock quantity |
+
+---
+
+## 9. Automated Testing & QA Evidence
+
+Automated tests are developed using **JUnit 5 (Jupiter)** and **Mockito**, managed through Maven Surefire. Tests run independently of external database connections to enable instantaneous continuous integration.
+
+```
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.store.service.AuthServiceTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.544 s
+Running com.store.service.CartServiceTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.241 s
+Running com.store.service.OrderServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.212 s
+Running com.store.service.PaymentServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s
+Running com.store.service.ProductServiceTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s
+
+Results:
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+```
+
+### Coverage Highlights
+- **Cart Validation**: Verifies that requests exceeding `product.stockQuantity` throw `IllegalArgumentException` (mapped to HTTP 400).
+- **Empty Cart Guard**: Rejects checkout requests when no cart items exist.
+- **Stock Restoration**: Validates that order cancellations restore inventory numbers back to products.
+- **Payment State Machines**: Guards against re-simulating settled orders and verifies caller ownership.
+
+---
+
+## 10. Local Environment Setup & Run Guide
+
+### 10.1 Prerequisites
+- **Java**: OpenJDK 17 LTS or 21 (`java -version`)
+- **Maven**: 3.8+ (`mvn -version`)
+- **Node.js**: 18+ & **npm** 9+ (`node -v`, `npm -v`)
+- **MySQL**: 8.0+ running on port 3306
+
+### 10.2 Database Provisioning
+Open MySQL Shell or MySQL Workbench and run:
+
+```sql
+CREATE DATABASE online_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+> **Automated Seeding**: When the backend starts against an empty database, `DataSeeder` automatically generates initial product categories, footwear brands, sample products, security roles, and an administrative account.
+
+### 10.3 Backend Launch
+
+```bash
+# 1. Clone repository
+git clone https://github.com/praSHAnTH630490/online-store-fullstack.git
+cd online-store-fullstack/backend
+
+# 2. Run automated test suite
+mvn test
+
+# 3. Package production executable fat JAR
+mvn clean package
+
+# 4. Start the Spring Boot application
+mvn spring-boot:run
+```
+
+*Backend server listens on `http://localhost:8080`.*
+
+### 10.4 Frontend Launch
+
+Open a second terminal window:
+
+```bash
+# 1. Navigate to frontend directory
+cd online-store-fullstack/frontend
+
+# 2. Install dependencies (deterministic lockfile)
+npm install
+
+# 3. Run ESLint code quality audit
+npm run lint
+
+# 4. Build production assets
+npm run build
+
+# 5. Start Vite development server
+npm run dev
+```
+
+*Frontend SPA is accessible at `http://localhost:5173`.*
+
+### 10.5 Default Test Credentials
+| Role | Email | Password | Access Scope |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@store.com` | `Admin@123` | Full Admin Dashboard, Inventory, Orders, CRUD |
+| **Customer** | *(Self-register via UI)* | *(User password)* | Storefront, Cart, Wishlist, Checkout, Orders |
+
+---
+
+## 11. Environment Configuration (.env)
+
+Configuration is externalized following 12-Factor App methodology. Copy the template:
 
 ```bash
 cp .env.example .env
 ```
 
-### Configurable Environment Variables
-
-| Variable Name | Default Value | Description |
+| Property | Default Value | Purpose |
 | :--- | :--- | :--- |
-| `PORT` | `8080` | Port on which Spring Boot backend listens |
+| `PORT` | `8080` | Spring Boot listening port |
 | `SPRING_DATASOURCE_URL` | `jdbc:mysql://localhost:3306/online_store?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC` | MySQL connection string |
 | `SPRING_DATASOURCE_USERNAME` | `root` | Database username |
 | `SPRING_DATASOURCE_PASSWORD` | `root` | Database password |
-| `APP_JWT_SECRET` | *(Externalized HMAC Key)* | Base64-encoded secret for JWT signature verification (min. 256 bits) |
-| `APP_JWT_EXPIRATION` | `86400000` | JWT token validity in milliseconds (24 hours) |
-| `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` | Comma-separated list of allowed frontend origins |
-| `VITE_API_BASE_URL` | `http://localhost:8080/api` | REST API base URL consumed by React Axios client |
+| `APP_JWT_SECRET` | *(Externalized base64 string)* | Cryptographic HMAC-SHA256 signature key (min. 256 bits) |
+| `APP_JWT_EXPIRATION` | `86400000` | Token expiration in milliseconds (24 hours) |
+| `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` | Whitelisted frontend origins (comma-separated) |
+| `VITE_API_BASE_URL` | `http://localhost:8080/api` | REST API base URL consumed by Axios client |
 
 ---
 
-## 10. Database Setup & Initialization
+## 12. Deployment & Cloud Production Readiness
 
-1. Start your local MySQL server instance.
-2. Create the database schema:
-   ```sql
-   CREATE DATABASE online_store CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   ```
-3. **Automatic Seeding**:  
-   The application includes an automated `DataSeeder` (`CommandLineRunner`). On initial launch against an empty schema, it automatically seeds:
-   - Security Roles (`ROLE_CUSTOMER`, `ROLE_ADMIN`)
-   - Default Administrator account:
-     - **Email**: `admin@store.com`
-     - **Password**: `Admin@123`
-   - Initial shoe categories (Running, Casual, Basketball)
-   - Initial footwear brands (Nike, Adidas, Puma)
-   - Initial shoe products with realistic images, pricing, and stock
+- **SPA Rewrites**: Because React Router DOM uses HTML5 pushState history, production static web servers (Vercel, Netlify, Cloudflare Pages, NGINX) require a rewrite rule redirecting all requests to `/index.html`:
+  ```nginx
+  location / {
+      try_files $uri $uri/ /index.html;
+  }
+  ```
+- **Containerization**: The backend produces a stand-alone Spring Boot executable fat JAR (`backend/target/online-store-0.0.1-SNAPSHOT.jar`) compatible with Docker containerization using `eclipse-temurin:17-jre-alpine`.
+- **Free-Tier Cloud Hosting**: Compatible with Render, Railway, and TiDB Serverless (Cloud MySQL). Connection pool validation queries (`HikariCP`) ensure smooth recovery after database inactivity cold starts.
 
 ---
 
-## 11. Backend Setup & Run Commands
+## 13. Troubleshooting & Edge Cases
 
-From the project root:
-
-```bash
-# Navigate to backend directory
-cd backend
-
-# Compile and run automated test suite
-mvn test
-
-# Package production executable JAR
-mvn clean package
-
-# Start the Spring Boot backend server
-mvn spring-boot:run
-```
-
-The backend server starts listening on `http://localhost:8080`.
+| Issue / Symptom | Root Cause | Solution |
+| :--- | :--- | :--- |
+| **`CommunicationsException: Communications link failure`** | MySQL server is stopped or port 3306 is inaccessible | Verify MySQL service is running (`Get-Service MySQL*` on Windows or `systemctl status mysql` on Linux). |
+| **`Access denied for user 'root'@'localhost'`** | Incorrect database credentials | Update `SPRING_DATASOURCE_PASSWORD` in your `.env` or pass `-DSPRING_DATASOURCE_PASSWORD=your_pass`. |
+| **`CORS policy: No 'Access-Control-Allow-Origin'`** | Frontend running on a non-whitelisted port | Ensure the frontend port matches `app.cors.allowed-origins` in `backend/src/main/resources/application.properties`. |
+| **Cart update returns `HTTP 400 Bad Request`** | Requested quantity exceeds available inventory stock | The backend prevents overselling. Verify product availability via the Admin Inventory portal. |
+| **Checkout returns `HTTP 400 Bad Request`** | Cart is empty or no delivery address is selected | Add an active product to the cart and ensure at least one saved delivery address is chosen. |
 
 ---
 
-## 12. Frontend Setup & Run Commands
+## 14. Engineering Roadmap
 
-Open a second terminal:
-
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies (respecting package-lock.json)
-npm install
-
-# Run ESLint check
-npm run lint
-
-# Build production assets
-npm run build
-
-# Start local development server
-npm run dev
-```
-
-The React Single Page Application is available at `http://localhost:5173`.
+- [ ] **Production Payment Gateway**: Integrate Razorpay or Stripe webhook-driven payment confirmation.
+- [ ] **Cloud Asset Storage**: Integrate AWS S3 or Cloudinary for direct product image uploads.
+- [ ] **OAuth2 Social Sign-In**: Support one-click authentication with Google and GitHub.
+- [ ] **Distributed Caching**: Integrate Redis for catalog caching to achieve sub-millisecond response times.
+- [ ] **Automated CI/CD**: Implement GitHub Actions pipeline executing `mvn test` and `npm run lint` on every pull request.
 
 ---
 
-## 13. REST API Specification
+## 15. Author & Professional Contact
 
-### Authentication (`/api/auth`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Public | Register new customer account and return JWT |
-| `POST` | `/api/auth/login` | Public | Authenticate user credentials and return JWT |
+<div align="center">
 
-### Catalog (`/api/products`, `/api/categories`, `/api/brands`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/products` | Public | Search products with pagination, filters, and sorting |
-| `GET` | `/api/products/{id}` | Public | Retrieve product details by ID |
-| `GET` | `/api/categories` | Public | List all active product categories |
-| `GET` | `/api/categories/{id}` | Public | Retrieve category details by ID |
-| `GET` | `/api/brands` | Public | List all active product brands |
-| `GET` | `/api/brands/{id}` | Public | Retrieve brand details by ID |
+### **Sai Prashanth Maturi**
+**Java Full Stack Developer**  
+*Hyderabad, Telangana, India*
 
-### Cart (`/api/cart`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/cart` | Authenticated | Retrieve customer's active shopping cart |
-| `POST` | `/api/cart/items` | Authenticated | Add product item to cart with stock validation |
-| `PUT` | `/api/cart/items/{id}`| Authenticated | Update quantity of a cart item |
-| `DELETE`| `/api/cart/items/{id}`| Authenticated | Remove specific item from cart |
-| `DELETE`| `/api/cart` | Authenticated | Clear all items from customer cart |
+[![GitHub](https://img.shields.io/badge/GitHub-praSHAnTH630490-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/praSHAnTH630490)
+[![Email](https://img.shields.io/badge/Email-prashanthmaturi2003%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:prashanthmaturi2003@gmail.com)
+[![Repository](https://img.shields.io/badge/Repository-online--store--fullstack-blue?style=for-the-badge&logo=git&logoColor=white)](https://github.com/praSHAnTH630490/online-store-fullstack)
 
-### Wishlist (`/api/wishlist`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/wishlist` | Authenticated | Retrieve customer's saved items |
-| `POST` | `/api/wishlist/items/{productId}` | Authenticated | Save product to wishlist |
-| `DELETE`| `/api/wishlist/items/{productId}` | Authenticated | Remove product from wishlist |
-
-### Orders & Payments (`/api/orders`, `/api/payments`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/orders` | Authenticated | Create order from cart items with address validation |
-| `GET` | `/api/orders` | Authenticated | Retrieve logged-in customer's order history |
-| `GET` | `/api/orders/{id}` | Authenticated | Retrieve itemized order details (ownership verified) |
-| `POST` | `/api/orders/{id}/cancel` | Authenticated | Cancel placed order and restore product stock |
-| `POST` | `/api/payments/simulate` | Authenticated | Execute safe payment simulation (`SUCCESS` / `FAILED`) |
-
-### Customer Profile & Addresses (`/api/users/me`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/users/me` | Authenticated | Get current authenticated user details |
-| `PUT` | `/api/users/me` | Authenticated | Update personal profile name and phone |
-| `PUT` | `/api/users/me/password` | Authenticated | Change account password (validates current password) |
-| `GET` | `/api/users/me/addresses` | Authenticated | List customer saved delivery addresses |
-| `POST` | `/api/users/me/addresses` | Authenticated | Save new delivery address |
-| `PUT` | `/api/users/me/addresses/{id}` | Authenticated | Update existing address (IDOR protected) |
-| `DELETE`| `/api/users/me/addresses/{id}` | Authenticated | Delete saved address |
-
-### Reviews & Contact (`/api/reviews`, `/api/contact`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/products/{id}/reviews` | Public | List reviews for a specific product |
-| `POST` | `/api/products/{id}/reviews` | Authenticated | Submit review (requires verified delivered order) |
-| `PUT` | `/api/reviews/{id}` | Authenticated | Update personal review rating/comment |
-| `DELETE`| `/api/reviews/{id}` | Authenticated | Delete personal review |
-| `POST` | `/api/contact` | Public / Auth | Submit customer contact inquiry message |
-
-### Administration (`/api/admin/**`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/admin/dashboard` | Role `ADMIN` | Metric summaries (Revenue, Orders, Products, Users) |
-| `GET, POST` | `/api/admin/products` | Role `ADMIN` | List all products or create new catalog product |
-| `PUT, DELETE`| `/api/admin/products/{id}`| Role `ADMIN` | Update product details or deactivate product |
-| `GET, POST` | `/api/admin/categories` | Role `ADMIN` | List all categories or create new category |
-| `PUT, DELETE`| `/api/admin/categories/{id}`| Role `ADMIN`| Update category details or deactivate category |
-| `GET, POST` | `/api/admin/brands` | Role `ADMIN` | List all brands or create new brand |
-| `PUT, DELETE`| `/api/admin/brands/{id}` | Role `ADMIN` | Update brand details or deactivate brand |
-| `GET` | `/api/admin/orders` | Role `ADMIN` | View full order log across all customers |
-| `PATCH` | `/api/admin/orders/{id}/status` | Role `ADMIN` | Advance order status (`CONFIRMED`, `DELIVERED`, etc.) |
-| `GET` | `/api/admin/inventory` | Role `ADMIN` | Inspect inventory stock levels across all products |
-| `PATCH` | `/api/admin/inventory/products/{id}` | Role `ADMIN` | Update product stock count directly |
-
----
-
-## 14. Testing Results
-
-### Automated Backend Tests
-- **Test Command**: `mvn test`
-- **Result**: `Tests run: 19, Failures: 0, Errors: 0, Skipped: 0`
-- **Coverage**: Core business services (`CartService`, `OrderService`, `PaymentService`, `AuthService`, `ProductService`).
-- **Regression Protection**: Verified zero regressions on cart boundary conditions, order empty-cart guards, IDOR protections, and stock restoration on cancellation.
-
-### Frontend Quality & Build Verification
-- **Lint Command**: `npm run lint` — **PASS** (0 errors, 0 warnings across all components and pages).
-- **Build Command**: `npm run build` — **PASS** (Optimized Vite bundle generated in < 1 second).
-
----
-
-## 15. Troubleshooting
-
-1. **MySQL Access Denied (`CommunicationsException` or `Access denied for user`)**:
-   - Check that MySQL is running on port 3306 (`Get-Service MySQL*` on Windows or `systemctl status mysql` on Linux).
-   - Ensure the database `online_store` exists.
-   - Verify `SPRING_DATASOURCE_USERNAME` and `SPRING_DATASOURCE_PASSWORD` match your local MySQL credentials.
-2. **CORS Error in Browser Console (`No 'Access-Control-Allow-Origin' header`)**:
-   - Verify that your frontend is running on `http://localhost:5173`.
-   - If using a custom Vite port, update `app.cors.allowed-origins` in `backend/src/main/resources/application.properties` or pass `-DCORS_ALLOWED_ORIGINS=http://localhost:your_port`.
-3. **Cart Quantity Update returns HTTP 400**:
-   - The backend strictly enforces inventory limits. If you request a quantity greater than `product.stockQuantity`, the backend returns `Requested quantity exceeds available stock`. Check the inventory count in the admin dashboard.
-4. **Checkout returns HTTP 400**:
-   - Ensure you have at least one delivery address saved and selected.
-   - Ensure your shopping cart contains at least one active product.
-
----
-
-## 16. Future Roadmap
-
-- [ ] **Real Payment Gateway Integration**: Integrate Razorpay or Stripe webhook-driven payment processing.
-- [ ] **Image Upload Service**: Integrate AWS S3 or Cloudinary for direct product image uploads from the Admin panel.
-- [ ] **OAuth2 Social Sign-In**: Add Google and GitHub one-click authentication.
-- [ ] **Email Notifications**: Dispatch order confirmation and dispatch emails using Spring Boot Starter Mail.
-- [ ] **Redis Caching**: Cache product catalog pages and category trees in Redis for sub-millisecond response times.
-
----
-
-## 17. Author & Contact
-
-- **Developer**: Sai Prashanth Maturi
-- **Role**: Java Full Stack Developer
-- **Location**: Hyderabad, Telangana, India
-- **Repository**: https://github.com/praSHAnTH630490/online-store-fullstack
-- **Email**: prashanthmaturi2003@gmail.com
+</div>
